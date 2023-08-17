@@ -12,6 +12,13 @@ namespace WebApp.Controllers
         public MakineContext context = new MakineContext();
         public IActionResult Index()
         {
+            //İZİN İŞLEMLERİ//
+            string kullaniciAdi = HttpContext.Session.GetString("KullaniciAdi");
+            if (kullaniciAdi == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+            //İZİN İŞLEMLERİ//
             Kullanicilar kullanici = new Kullanicilar();
              kullanici = SessionHelper.GetObjectFromJson<Kullanicilar>(HttpContext.Session, "Kullanici");
             //LAYOUT BİLDİRİM//

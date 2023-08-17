@@ -8,6 +8,13 @@ namespace WebApp.Controllers
     {
         public IActionResult Index()
         {
+            //İZİN İŞLEMLERİ//
+            string kullaniciAdi = HttpContext.Session.GetString("KullaniciAdi");
+            if (kullaniciAdi == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+            //İZİN İŞLEMLERİ//
             MakineContext context = new MakineContext();
             List<Is> IsListesi = context.Jobs.ToList();
             ViewBag.Musteriler = context.Musteris.ToList();

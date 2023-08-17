@@ -11,6 +11,7 @@ namespace WebApp.Controllers
     {
         public IActionResult Index()
         {
+            HttpContext.Session.Remove("KullaniciAdi");
             return View();
         }
         [HttpPost]

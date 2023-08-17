@@ -8,6 +8,13 @@ namespace WebApp.Controllers
         public MakineContext context=new MakineContext();
         public IActionResult Index()
         {
+            //İZİN İŞLEMLERİ//
+            string kullaniciAdi = HttpContext.Session.GetString("KullaniciAdi");
+            if (kullaniciAdi == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+            //İZİN İŞLEMLERİ//
             Musteri Musteri = new Musteri();
             //LAYOUT BİLDİRİM//
             var job = context.Jobs.Where(job => job.KalanZaman == "Bugün");
