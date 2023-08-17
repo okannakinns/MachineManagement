@@ -1,0 +1,144 @@
+﻿@using WebApp.Models;
+@model Makine;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Makine Güncelle
+                    </header>
+<div class="panel-body">
+    <form method="post" action="@Url.Action("Kaydet", "AdminMakineGuncelle")" role="form">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="Adi">Adi</label>
+                                    <input required type="text" class="form-control" id="Adi" name="Adi" value="@Model.Adi">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="MakineTip">Makine Tipi</label>
+                <select name="MakineTipId" class="form-control" id="MakineTipId">
+                    @foreach (var Makine in ViewBag.MakineTipleri)
+                    {
+                        <option value="@Makine.Id" @(Model.MakineTipId == Makine.Id ? "selected" : "")>@Makine.Adi</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="MarkaId">Markası</label>
+                <select name="MarkaId" class="form-control" id="MarkaId">
+                    <option value="0">Seçiniz</option>
+                    @foreach (var Marka in ViewBag.Markalar)
+                    {
+                        <option value="@Marka.Id" @(Model.MarkaId == Marka.Id ? "selected" : "")>@Marka.Adi</option>
+                    }
+                </select>
+            </div>
+            <div id="ModelInput" class="form-group col-md-4">
+                <label for="ModelId">Modeli</label>
+                <select name="ModelId" class="form-control" id="ModelId">
+                    @foreach (var modeller in ViewBag.Modeller)
+                    {
+                        <option value="@modeller.Id" @(Model.ModelId == modeller.Id ? "selected" : "")>@Model.Adi</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="Plaka">Plaka</label>
+                                    <input required type="text" class="form-control" id="Plaka" name="Plaka" value="@Model.Plaka">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="Km">Km</label>
+                                    <input required type="text" class="form-control" id="Km" name="Km" value="@Model.Km">
+               </div>
+            <div class="form-group col-md-4">
+                <label for="MakineDurum">Makine Durumu</label>
+                <select name="MakineDurumId" class="form-control" id="MakineDurumId">
+                    @foreach (var durum in ViewBag.MakineDurumlari)
+                    {
+                        <option value="@durum.Id" @(Model.MakineDurumId == durum.Id ? "selected" : "")>@durum.Adi</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <input type="hidden" class="form-control" id="Id" name="Id" value="@Model.Id">
+        <input type="hidden" class="form-control" id="OlusturulmaTarihi" name="OlusturulmaTarihi" value="@Model.OlusturulmaTarihi">
+        <input type="hidden" class="form-control" id="GuncellenmeTarihi" name="GuncellenmeTarihi" value="@Model.GuncellenmeTarihi">
+        <input type="hidden" class="form-control" id="Durumu" name="Durumu" value="@Model.Durumu">
+                            <input type="hidden" class="form-control" id="ToplamCalismaSaati" name="ToplamCalismaSaati" value="@Model.ToplamCalismaSaati">
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <button type="submit" class="btn btn-info">Kaydet</button>
+            </div>
+        </div>
+    </form>
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div style="margin-top:10px;" class="alert alert-block alert-danger fade in">
+            <button data-dismiss="alert" class="close close-sm" type="button">
+                <i class="icon-remove"></i>
+            </button>
+            <strong>Hata!</strong> @ViewBag.ErrorMessage
+        </div>
+    }
+</div>
+</section>
+</div>
+        </div>
+</section>
+</section>
+
+<script src="/WebAdminTheme/js/jquery-1.8.3.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var ModelInputDiv = $("#ModelInput");
+        var Model = $("#ModelId");
+        var Marka = $("#MarkaId");
+
+        // Sayfa yüklendiğinde ve Marka seçildiğinde tetiklenen fonksiyonları belirtelim.
+        onPageLoad();
+        Marka.on("change", function () {
+            var selectedMarkaId = $(this).val();
+            getModels(selectedMarkaId);
+        });
+
+        // Sayfa yüklendiğinde tetiklenecek fonksiyon
+        function onPageLoad() {
+            var selectedMarkaId = Marka.val();
+            getModels(selectedMarkaId);
+        }
+
+        // Marka değiştiğinde tetiklenen fonksiyonu ayıralım.
+        function getModels(selectedMarkaId) {
+            var seçinizOption = Marka.find('option[value="0"]');
+            if (selectedMarkaId !== "") {
+                ModelInputDiv.show();
+                seçinizOption.remove();
+
+                // Models action methodundan verileri al
+                $.get("/AdminMakine/Models", { markaId: selectedMarkaId }, function (data) {
+                    Model.empty();
+                    $.each(data, function (index, model) {
+                        var option = $("<option></option>").val(model.id).text(model.adi);
+                        Model.append(option);
+                    });
+
+                    // Sayfa yüklendiğinde seçilen ModelId değerini set et
+                    Model.val("@Model.ModelId");
+                });
+            } else {
+                ModelInputDiv.hide();
+            }
+        }
+    });
+</script>

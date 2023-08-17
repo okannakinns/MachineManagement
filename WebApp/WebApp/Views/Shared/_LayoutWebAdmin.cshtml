@@ -1,0 +1,348 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>Makine Yönetim Paneli</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/WebAdminTheme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/WebAdminTheme/css/bootstrap-reset.css" rel="stylesheet">
+    
+    <!--external css-->
+    <link href="/WebAdminTheme/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/WebAdminTheme/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="/WebAdminTheme/css/style.css" rel="stylesheet">
+    <link href="/WebAdminTheme/css/style-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css">
+   
+   
+
+</head>
+
+<body>
+
+    <section id="container">
+        <!--header start-->
+        <header class="header white-bg">
+            <div class="sidebar-toggle-box">
+                <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+            </div>
+            <!--logo start-->
+            <a href="@Url.Action("Index","AdminKullanici")" class="logo">MAKİNE<span>YÖNETİM</span></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <ul class="nav top-menu">
+            <!-- notification dropdown start-->
+            <li id="header_notification_bar" class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                    <i class="icon-bell-alt"></i>
+                            @if (ViewBag.JobCount != 0)
+                            {
+                                <span class="badge bg-warning">@ViewBag.JobCount</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning"></span>
+                            }
+
+                           
+                            
+                </a>
+                <ul class="dropdown-menu extended notification">
+                    <div class="notify-arrow notify-arrow-yellow"></div>
+                    <li> 
+                         @if(ViewBag.JobCount!=0){
+                                <p class="yellow" >Bugün Yapılacak @ViewBag.JobCount Adet İş </p>
+                         }
+                                @if (ViewBag.JobCount == 0)
+                                {
+                                    @if (ViewBag.threeDayCount != 0)
+                                    {
+                                        <p class="yellow" style="background-color:blueviolet;">Yakın Zamanda(3 Gün) @ViewBag.threeDayCount Adet İş</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="yellow" style="background-color:blueviolet;">Yakın Zamanda(3 Gün) İş Bulunmamaktadır.</p>
+                                    }
+                                }
+                            </li>
+                    @if(ViewBag.JobsCount!=0){
+                   @foreach (var job in ViewBag.Jobs)
+                            {                 
+                    <li>
+                                        <a href="@Url.Action("Index","AdminIs")">
+                            <span class="label label-danger"><i class="icon-bolt"></i></span>
+                            @job.Adi
+                            <span class="small italic">Bugün Başlanacak</span>
+                        </a>
+                    </li>
+                                }
+                            }
+                            @if (ViewBag.JobCount == 0)
+                            {
+                                @if (ViewBag.threeDayCount != 0)
+                                {
+                                    @foreach (var td in ViewBag.threeDay)
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Index","AdminIs")">
+                                                <span class="label label-danger" style="background-color:blueviolet;"><i class="icon-bolt"></i></span>
+                                                @td.Adi
+                                                <span class="small italic">@td.KalanZaman Sonra</span>
+                                            </a>
+                                        </li>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index","AdminIs")">
+                                            <span> Yakın Zamanda İş Bulunamadı.</span>
+                                            
+                                            
+                                        </a>
+                                    </li>
+                                }
+                            }
+
+                            <li>
+                        <a href="@Url.Action("Index","AdminIsRapor")">İş Raporlarına Git</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- notification dropdown end -->
+            </ul>
+            </div>
+            <div class="top-nav ">
+                <!--search & user info start-->
+                <ul class="nav pull-right top-menu">
+
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" style="width:24px; height:24px; margin-right:3px; border-radius:9px;" src="/WebAdminTheme/img/user.jpg">
+                            <span class="username">@Context.Session.GetString("KullaniciAdi")</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+
+                            <li><a href="@Url.Action("Index","AdminGiris")"><i class="icon-key"></i> ÇIKIŞ</a></li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!--search & user info end-->
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <li>
+                        <a href="@Url.Action("Index","AdminKullanici")">
+                            <i class="fi fi-ss-users"></i>
+                            <span>Kullanıcılar</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="@Url.Action("Index", "AdminMusteri")">
+                            <i style="margin-top:10px;" class="fi fi-ss-chalkboard-user"></i>
+                            <span>Müşteri</span>
+                        </a>
+
+                    </li>
+                   
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fi fi-ss-hotel"></i>
+                            <span>Makine</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="@Url.Action("Index","AdminMakine")">Makineler</a></li>
+                            <li><a href="@Url.Action("Index","AdminMakineTip")">Makine Tipi</a></li>
+                            <li><a href="@Url.Action("Index","AdminMakineDurum")">Makine Durumu</a></li>
+                            <li><a href="@Url.Action("Index","AdminMarka")">Makine Markası</a></li>
+                            <li><a href="@Url.Action("Index","AdminModel")">Makine Modeli</a></li>
+                            
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="@Url.Action("Index", "PhotoGallery")">
+                            <i style="margin-top:10px;" class="fi fi-ss-picture"></i>
+                            <span>Galeri</span>
+                        </a>
+
+                    </li>
+                    <li class="sub-menu">
+                        <a href="@Url.Action("Index", "AdminIs")">
+                            <i style="margin-top:10px;" class="fi fi-ss-briefcase"></i>
+                            <span>İş Tanımlama</span>
+                        </a>
+
+                    </li>
+                    
+                    <li class="sub-menu">
+                        <a href="@Url.Action("Index", "AdminFiyat")">
+                            <i style="margin-top:10px;" class="fi fi-ss-coins"></i>
+                            <span>Fiyat</span>
+                        </a>
+                        
+                    </li>
+                    <li class="sub-menu">
+                        <a href="@Url.Action("Index", "AdminFisIslemleri")">
+                            <i style="margin-top:10px;" class="fi fi-ss-file-edit"></i>
+                            <span>Fiş İşlemleri</span>
+                        </a>
+
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                           
+                            <i style="margin-top:10px;" class="fi fi-ss-search-alt"></i>
+
+                            <span>Raporlar</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="@Url.Action("Index","AdminIsRapor")">İş Raporu</a></li>
+                            <li><a href="@Url.Action("Index","AdminMakineRapor")">Makine Durum Raporu</a></li>
+                            @*<li><a href="@Url.Action("Index","AdminMakinetarihRapor")">Makine Tarih Raporu</a></li>*@
+                           
+
+                        </ul>
+                    </li>
+                   
+                   
+
+
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+
+        </aside>
+        <!--sidebar end-->
+        <!--footer start-->
+        @RenderBody()
+        <footer class="site-footer">
+            <div class="text-center">
+                2023 &copy;Makine Yönetim by Okan Akın.
+                <a href="#" class="go-top">
+                    <i class="icon-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="/WebAdminTheme/js/jquery.js"></script>
+    <script src="/WebAdminTheme/js/jquery-1.8.3.min.js"></script>
+    <script src="/WebAdminTheme/js/bootbox/bootbox.js"></script>
+    <script src="/WebAdminTheme/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="/WebAdminTheme/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="/WebAdminTheme/js/jquery.scrollTo.min.js"></script>
+    <script src="/WebAdminTheme/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/WebAdminTheme/js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="/WebAdminTheme/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="/WebAdminTheme/js/owl.carousel.js"></script>
+    <script src="/WebAdminTheme/js/jquery.customSelect.min.js"></script>
+    <script src="/webadmintheme/assets/advanced-datatable/media/js/jquery.datatables.min.js"></script>
+    <script src="/WebAdminTheme/js/respond.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+
+    <script src="/WebAdminTheme/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script src="/WebAdminTheme/js/sparkline-chart.js"></script>
+    <script src="/WebAdminTheme/js/easy-pie-chart.js"></script>
+    <script src="/WebAdminTheme/js/count.js"></script>
+    <script src="/WebAdminTheme/js/ga.js"></script>
+    <script type="text/javascript" src="/WebAdminTheme/assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+    <script>
+
+        //owl carousel
+
+        $(document).ready(function () {
+            $("#owl-demo").owlCarousel({
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true,
+                autoPlay: true
+
+            });
+
+
+            $('#example').dataTable({
+                "aaSorting": [[4, "desc"]]
+            });
+
+
+        });
+
+
+        //custom select box
+
+        $(function () {
+            $('select.styled').customSelect();
+        });
+
+    </script>
+
+    <script>
+        function confirmSilme(event) {
+            event.preventDefault(); // Form submitini engellemek için
+
+            bootbox.confirm({
+                title: "Uyarı",
+                closeButton: false,
+                size: 'medium',
+                locale: 'tr',
+                message: "<p style='font-size:15px;font-weight:700px;'> Bu Veriyi Silmek İstediğinizden Emin Misiniz?</p>",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Vazgeç',
+                        className: 'btn-secondary'
+                    },
+                    confirm: {
+                        label: '<i class="fa fa-trash"></i> Sil',
+                        className: 'btn-danger'
+                    }
+                },
+                centerVertical: true,
+                backdrop: true,
+                callback: function (result) {
+                    if (result) {
+                        // Onaylandığında formu gönder
+                        event.target.closest('form').submit();
+                    }
+                }
+            });
+        }
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,64 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.Is>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-8">
+                <section class="panel">
+                    <header class="panel-heading">
+                        İş (@Model.Count() Adet Kayıt Bulunmaktadır)
+                    </header>
+                    <div class="panel-body">
+                        <form method="post" action="@Url.Action("Ekle", "AdminIsEkle")">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="Adi">Adı</label>
+                                    <input required type="text" class="form-control" id="Adi" name="Adi">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="MusteriId">Müşteri</label>
+                                    <select name="MusteriId" class="form-control" id="MusteriId">
+                                        @foreach (var Musteri in ViewBag.Musteriler)
+                                        {
+                                            <option value="@Musteri.Id">@Musteri.AdiSoyadi</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="BaslangicTarihi">Başlangıç Tarihi</label>
+                                    <input required type="datetime-local" class="form-control" id="BaslangicTarihi" name="BaslangicTarihi">
+                                </div>
+                            </div>
+                           
+                            
+
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <button type="submit" class="btn btn-success">Kaydet</button>
+                                </div>
+                            </div>
+                        </form>
+                        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                        {
+                            <div style="margin-top:10px;" class="alert alert-block alert-danger fade in">
+                                <button data-dismiss="alert" class="close close-sm" type="button">
+                                    <i class="icon-remove"></i>
+                                </button>
+                                <strong>Hata!</strong> @ViewBag.ErrorMessage
+                            </div>
+                        }
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+
+
+</section>

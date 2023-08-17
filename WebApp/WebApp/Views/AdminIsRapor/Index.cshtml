@@ -1,0 +1,444 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.Is>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+    var ayBazliIsVerileri = ViewBag.AyBazliIsVerileri as List<AyBazliIsVerisi>;
+    var turkceAyAdlari = ViewBag.TurkceAyAdlari as List<string>;
+    int i = 0;
+
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-8">
+                <section class="panel">
+                    <section class="panel-body">
+                        <div class="row">
+                            <form method="post" action="@Url.Action("MusteriInfo","AdminIsRapor")">
+                                <div class="col-xs-8 col-sm-5 col-md-4 col-lg-4">
+                                    <label for="MusteriId">Müşteri</label>
+                                    <select name="MusteriId" class="form-control" id="MusteriId">
+                                        <option value="">Tümü</option>
+                                        @foreach (var Musteri in ViewBag.Musteriler)
+                                        {
+                                            <option value="@Musteri.Id" @(ViewBag.ClosestJob != null && ViewBag.ClosestJob.Musteri.Id == Musteri.Id ? "selected" : "")>@Musteri.AdiSoyadi</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-8 col-sm-5 col-md-4 col-lg-4">
+                                        <button id="calculateButton" class="btn" style="margin-top:23px; background-color:#39b5aa; color:#fff;">Müşteri Detay</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-11">
+                                    @if (turkceAyAdlari != null)
+                                    {
+
+                                    }
+                                    <div class="is-grafik">
+                                        <!-- custom chart start -->
+                                        <div class="border-head" style="margin-top: 20px;">
+                                            <h3>İş Grafiği</h3>
+                                        </div>
+                                        <div class="custom-bar-chart">
+                                            <ul class="y-axis">
+
+                                                <li><span>11</span></li>
+                                                <li><span>9</span></li>
+                                                <li><span>7</span></li>
+                                                <li><span>5</span></li>
+                                                <li><span>3</span></li>
+
+                                            </ul>
+
+
+                                            @foreach (var ayadlari in turkceAyAdlari)
+                                            {
+
+
+                                                var ayAdi = ayBazliIsVerileri[i].Ay;
+
+
+                                                var ayVeri = ayBazliIsVerileri.FirstOrDefault(item => item.Ay == ayAdi);
+
+                                                if (ayVeri != null && ayadlari == ayVeri.Ay)
+                                                {
+
+                                                    if (ayVeri.IsSayisi == 1)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">5%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                    if (ayVeri.IsSayisi == 2)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">10%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                    if (ayVeri.IsSayisi == 3)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">20%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                    if (ayVeri.IsSayisi == 4)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">30%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                    if (ayVeri.IsSayisi == 5)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">40%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                    if (ayVeri.IsSayisi == 6)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">50%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                    if (ayVeri.IsSayisi == 7)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">60%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                    if (ayVeri.IsSayisi == 8)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">70%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                    if (ayVeri.IsSayisi == 9)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">80%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                    if (ayVeri.IsSayisi == 10)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">90%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                    if (ayVeri.IsSayisi >= 11)
+                                                    {
+                                                        <div class="bar">
+                                                            <div class="title">@ayadlari</div>
+                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">100%</div>
+                                                        </div>
+                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                                    }
+                                                }
+
+                                                else
+                                                {
+                                                    <div class="bar">
+                                                        <div class="title">@ayadlari</div>
+                                                        <div class="value tooltips aybazliIs" data-original-title="0" data-toggle="tooltip" data-placement="top">0</div>
+                                                    </div>
+                                                }
+
+
+                                            }
+
+
+                                        </div>
+                                        <!-- custom chart end -->
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                        @if (ViewBag.ContactInfo != null)
+                        {
+                            <div class="contact-info" style="margin-bottom:10px;">
+                                <div class="row">
+                                    <div class="weather-bg" style="margin-top:43px;">
+                                        <div class="panel-body">
+                                            <div class="col-xs-12 text-center">
+
+                                                İletişim Bilgileri
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <footer class="weather-category" style="margin-top:10px;">
+                                        <ul>
+                                            <li class="active">
+                                                <h5>TELEFON</h5>
+                                                @ViewBag.ContactInfo.Telefon
+                                            </li>
+                                            <li>
+                                                <h5>EPOSTA</h5>
+                                                @ViewBag.ContactInfo.Email
+                                            </li>
+                                            <li>
+                                                <h5>AÇIKLAMA</h5>
+                                                @ViewBag.ContactInfo.Aciklama
+                                            </li>
+                                        </ul>
+                                    </footer>
+                                </div>
+                            </div>
+                        }
+                    </section>
+                </section>
+            </div>
+            <div class="col-lg-4">
+                <!--user info table start-->
+                @if (ViewBag.ClosestJob != null)
+                {
+                    <div class="user-info">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <a href="#" class="task-thumb">
+                                    <img src="/WebAdminTheme/img/user.png" style="margin-bottom:20px; width="90px" height="83px" alt="">
+                                </a>
+
+                                <div class="task-thumb-details">
+                                    <h1><a href="#">@ViewBag.ClosestJob.Musteri.AdiSoyadi</a></h1>
+                                    <p>Müşteri</p>
+                                </div>
+
+
+                                <table class="table table-hover personal-task">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i class="icon-suitcase"></i>
+                                            </td>
+                                            <td>Yapılan İş Sayısı</td>
+                                            <td>@ViewBag.FilteredJobsCount</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i class="icon-briefcase"></i>
+                                            </td>
+                                            <td>Son Yapılan İş</td>
+                                            <td>@ViewBag.ClosestJob.Adi</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i class="icon-calendar-empty"></i>
+                                            </td>
+                                            <td>Son İş Tarihi</td>
+                                            <td>@ViewBag.ClosestJob.BaslangicTarihi</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </section>
+                        <!--user info table end-->
+                    </div>
+                }
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        İş Rapor
+
+                    </header>
+                    <div class="tablo-veriler">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Adı</th>
+                                    <th>Müşteri</th>
+                                    <th>Başlangıç Tarihi</th>
+                                    <th>Bitiş Tarihi</th>
+                                    <th>Kalan Zaman</th>
+
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var Is in ViewBag.Is)
+                                {
+
+                                    <tr data-musteri-id="@Is.MusteriId">
+
+                                        <td>@Is.Adi</td>
+                                        <td>@Is.Musteri.AdiSoyadi</td>
+                                        <td>@Is.BaslangicTarihi</td>
+                                        <td>@Is.BitisTarihi</td>
+                                        <td><span data-time-id="@Is.KalanZaman" class="label is-time label-mini">@Is.KalanZaman</span></td>
+                                        <td>
+
+                                            <form method="post" action="@Url.Action("Guncelle", "AdminIs")" style="display: inline;">
+                                                <input type="hidden" name="id" value="@Is.Id" />
+                                                <button type="submit" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                            </form>
+                                            <form method="post" action="@Url.Action("Sil", "AdminIs")" style="display: inline;">
+                                                <input type="hidden" name="id" value="@Is.Id" />
+                                                <button type="submit" class="btn btn-danger btn-xs" onclick="confirmSilme(event)"><i class="icon-trash"></i></button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>
+<script src="/WebAdminTheme/js/jquery-1.8.3.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function filterTableRows(selectedMusteriId) {
+
+            if (selectedMusteriId) {
+                // Tablodaki satırları döngü ile gezerek işlem yap
+                $(".tablo-veriler table.table tbody tr").each(function () {
+                    var rowMusteriId = $(this).data("musteri-id"); // Satırdaki Müşteri Id değerini al
+                    if (rowMusteriId == selectedMusteriId) {
+                        $("#calculateButton").fadeIn();
+                        $(".is-grafik").hide();
+                        // Eşleşen satırı göster
+                        $(this).show();
+                    } else {
+                        // Diğer satırları gizle
+                        $(this).hide();
+                    }
+                });
+            } else {
+                // Eğer "Seçiniz" seçeneği seçildiyse tüm satırları göster
+                $(".tablo-veriler table.table tbody tr").show();
+                $("#calculateButton").hide();
+                $(".is-grafik").fadeIn();
+            }
+        }
+
+
+        $("#MusteriId").on('change', function () {
+            var selectedMusteriId = $(this).val(); // Seçilen MusteriId'yi al
+            filterTableRows(selectedMusteriId);
+            $(".user-info").fadeOut();
+            if (selectedMusteriId != "") {
+                $(".is-grafik").fadeOut();
+            }
+
+            $(".contact-info").fadeOut();
+        });
+        $("#calculate").on('click', function () {
+            $(".user-info").fadeIn();
+            $(".contact-info").fadeIn();
+            $(".is-grafik").hide();
+
+        });
+
+
+        // Sayfa yüklendiğinde
+        var selectedMusteriId = $("#MusteriId").val();
+        filterTableRows(selectedMusteriId);
+
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        updateColors();
+    });
+
+    function updateColors() {
+        $(".is-time").each(function () {
+            var zaman = $(this);
+            var zamandeger = zaman.data("time-id");
+
+            if (zamandeger == "Bugün") {
+                zaman.css("background-color", "red");
+            } else if (zamandeger == "Yapıldı") {
+                zaman.css("background-color", "grey");
+            } else if (zamandeger == "Başlandı") {
+                zaman.css("background-color", "blue");
+            }
+            else if (zamandeger == "1 Gün" || zamandeger == "2 Gün" || zamandeger == "3 Gün" || zamandeger == "4 Gün") {
+                zaman.css("background-color", "orange");
+            } else if (zamandeger == "5 Gün" || zamandeger == "6 Gün" || zamandeger == "7 Gün" || zamandeger == "8 Gün" || zamandeger == "9 Gün" || zamandeger == "10 Gün") {
+                zaman.css("background-color", "#ffd800");
+            } else {
+                zaman.css("background-color", "green");
+            }
+        });
+    }
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        var miktar = $(".aybazliIs").data("original-title");
+
+        $(".bar").each(function () {
+            if (miktar == 3) {
+                $(".aybazliIs").css("height", "20%");
+            }
+            if (miktar == 4) {
+                $(".aybazliIs").css("height", "30%");
+            }
+            if (miktar == 5) {
+                $(".aybazliIs").css("height", "40%");
+            }
+            if (miktar == 6) {
+                $(".aybazliIs").css("height", "50%");
+            }
+            if (miktar == 7) {
+                $(".aybazliIs").css("height", "60%");
+            }
+            if (miktar == 8) {
+                $(".aybazliIs").css("height", "70%");
+            }
+            if (miktar == 9) {
+                $(".aybazliIs").css("height", "80%");
+            }
+            if (miktar == 10) {
+                $(".aybazliIs").css("height", "90%");
+            }
+            if (miktar >= 11) {
+                $(".aybazliIs").css("height", "100%");
+            }
+
+        });
+    });
+</script>
+

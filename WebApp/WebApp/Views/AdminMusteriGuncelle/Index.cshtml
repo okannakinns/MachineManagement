@@ -1,0 +1,77 @@
+﻿@using WebApp.Models;
+@model Musteri;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-5">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Müşteri Güncelle
+                    </header>
+                    <div class="panel-body">
+                        <form method="post" action="@Url.Action("Kaydet", "AdminMusteriGuncelle")">
+
+                            <input type="hidden" class="form-control" id="Id" name="Id" value="@Model.Id">
+                            <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="adiSoyadi">Adı Soyadı</label>
+                                    <input required type="text" class="form-control" id="adiSoyadi" name="AdiSoyadi" value="@Model.AdiSoyadi">
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="telefon">Telefon</label>
+                                    <input required type="text" class="form-control" placeholder="(500) 000-0000" data-mask="(999) 999-9999" id="telefon" name="Telefon" value="@Model.Telefon" onkeypress="return event.charCode >= 48 && event.charCode <= 57" minlength="10" maxlength="15">
+
+                            </div>
+
+
+                            <div class="form-group col-md-4">
+                                <label for="email">Email</label>
+                                    <input required type="text" class="form-control" id="email" name="Email" maxlength="50" value="@Model.Email">
+                            </div>
+                            </div>
+                                <div class="row">
+                            <div class="form-group col-md-10">
+                                <label for="aciklama">Açıklama</label>
+                                <textarea class="form-control" id="aciklama" name="Aciklama" rows="3" maxlength="130">@Model.Aciklama</textarea>
+                                    </div>
+
+                                <input type="hidden" class="form-control" id="Durumu" name="Durumu" value="@Model.Durumu">
+                                <input type="hidden" class="form-control" id="GuncellenmeTarihi" name="GuncellenmeTarihi" value="@Model.GuncellenmeTarihi">
+                                <input type="hidden" class="form-control" id="OlusturulmaTarihi" name="OlusturulmaTarihi" value="@Model.OlusturulmaTarihi">
+
+
+
+                            </div>
+                            <div class="row">
+                            <div class="form-group col-md-6">
+                                <button type="submit" class="btn btn-info">Kaydet</button>
+                            </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-5">
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Hata!</strong> @ViewBag.ErrorMessage
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</section>
+

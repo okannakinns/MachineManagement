@@ -1,0 +1,54 @@
+﻿@using WebApp.Models;
+@model Kullanicilar
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Kullanıcı Güncelle
+                    </header>
+                    <div class="panel-body">
+                        <form method="post" action="@Url.Action("Kaydet", "AdminKullaniciGuncelle")" class="form-inline">
+                            <div class="form-group col-md-4">
+                                <label for="Adi">Adı</label>
+                                <input type="hidden" class="form-control" id="Id" name="Id" value="@Model.Id">
+                                <input required type="text" class="form-control" id="Adi" name="Adi" value="@Model.Adi" minlength="5" maxlength="12">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="Sifre">Şifre</label>
+                                <input required type="password" class="form-control" id="Sifre" name="Sifre" value="@Model.Sifre" minlength="6" maxlength="20">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <input type="hidden" class="form-control" id="Durumu" name="Durumu" value="@Model.Durumu">
+                                <input type="hidden" class="form-control" id="OlusturulmaTarihi" name="OlusturulmaTarihi" value="@Model.OlusturulmaTarihi">
+                                <input type="hidden" class="form-control" id="GuncellenmeTarihi" name="GuncellenmeTarihi" value="@Model.GuncellenmeTarihi">
+
+                            </div>
+                            <div class="form-group col-md-12">
+                                <button style="margin-top:15px;" type="submit" class="btn btn-info">Kaydet</button>
+                            </div>
+                        </form>
+                        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                        {
+                            <div style="margin-top:10px;" class="alert alert-block alert-danger fade in">
+                                <button data-dismiss="alert" class="close close-sm" type="button">
+                                    <i class="icon-remove"></i>
+                                </button>
+                                <strong>Hata!</strong> @ViewBag.ErrorMessage
+                            </div>
+                        }
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>
+
+

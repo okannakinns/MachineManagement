@@ -1,0 +1,57 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.MakineTip>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+     
+        <section class="panel">
+            <header class="panel-heading">
+                Makine Tip Tablosu (@Model.Count() Adet Kayıt Bulunmaktadır)
+
+                <form method="post" action="@Url.Action("Index", "AdminMakineTipEkle")">
+                    <div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+                        <button style="position:fixed; top:80px; right:30px;" type="submit" class="btn btn-success">Ekle</button>
+                    </div>
+                </form>
+            </header>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Adı</th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Makinetip in Model)
+                    {
+                        <tr>
+                            <td>@Makinetip.Id</td>
+                            <td>@Makinetip.Adi</td>
+
+
+
+                            <td>
+                                <form method="post" action="@Url.Action("Guncelle", "AdminMakineTip")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@Makinetip.Id" />
+                                    <button type="submit" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                </form>
+                                <form method="post" action="@Url.Action("Sil", "AdminMakineTip")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@Makinetip.Id" />
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="confirmSilme(event)"><i class="icon-trash"></i></button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+    </section>
+</section>

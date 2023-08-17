@@ -1,0 +1,55 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.Model>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Model (@Model.Count() Adet Kayıt Bulunmaktadır)
+                    </header>
+                    <div class="panel-body">
+                        <form method="post" action="@Url.Action("Ekle", "AdminModelEkle")">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="MarkaId">Marka</label>
+                                    <select name="MarkaId" class="form-control" id="MarkaId">
+                                        @foreach (var tip in ViewBag.Markalar)
+                                        {
+                                            <option value="@tip.Id">@tip.Adi</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Adi">Adı</label>
+                                    <input required type="text" class="form-control" id="Adi" name="Adi">
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <button type="submit" class="btn btn-success">Kaydet</button>
+                                </div>
+                            </div>
+                        </form>
+                        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                        {
+                            <div style="margin-top:10px;" class="alert alert-block alert-danger fade in">
+                                <button data-dismiss="alert" class="close close-sm" type="button">
+                                    <i class="icon-remove"></i>
+                                </button>
+                                <strong>Hata!</strong> @ViewBag.ErrorMessage
+                            </div>
+                        }
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>

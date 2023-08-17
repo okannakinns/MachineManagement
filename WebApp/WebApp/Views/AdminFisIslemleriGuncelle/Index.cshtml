@@ -1,0 +1,95 @@
+﻿@using WebApp.Models;
+@model FisIslemleri
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Fiş İşlemleri Güncelle
+                    </header>
+                    <div class="panel-body">
+                        <form method="post" action="@Url.Action("Kaydet", "AdminFisIslemleriGuncelle")">
+                            <div class="row">
+                                <input type="hidden" class="form-control" id="Id" name="Id" value="@Model.Id">
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="IsId">İş</label>
+                                    <select name="IsId" class="form-control" id="IsId">
+                                        <option value="">Seçiniz</option>
+                                        @foreach (var Is in ViewBag.Isler)
+                                        {
+                                            <option value="@Is.Id" @(Is.Id == Model.IsId ? "selected" : "")>@Is.Adi</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="MakineId">Makine</label>
+                                    <select name="MakineId" class="form-control" id="MakineId">
+                                        @foreach (var makine in ViewBag.Makineler)
+                                        {
+                                            <option value="@makine.Id" @(makine.Id == Model.MakineId ? "selected" : "")>@makine.Adi</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="SonKm">Son Km</label>
+                                    <input required type="number" class="form-control" id="SonKm" name="SonKm" value="@Model.SonKm">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="FiyatId">Fiyat</label>
+                                    <select name="FiyatId" class="form-control" id="FiyatId">
+                                        @foreach (var fiyat in ViewBag.Fiyatlar)
+                                        {
+                                            <option value="@fiyat.Id" @(fiyat.Id == Model.FiyatId ? "selected" : "")>@fiyat.Adi</option>
+                                        }
+                                    </select>
+                                </div>
+
+
+                                @* <div class="form-group col-md-4">
+                                <label for="BaslangicTarihi">Başlangıç Tarihi</label>
+                                <input required type="text" class="form-control" id="BaslangicTarihi" name="BaslangicTarihi" value="@Model.BaslangicTarihi">
+                                </div>*@
+
+                                <div class="form-group col-md-4">
+                                    <label for="BitisTarihi">Bitiş Tarihi</label>
+                                    <input required type="text" class="form-control" id="BitisTarihi" name="BitisTarihi" value="@Model.BitisTarihi">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <button type="submit" class="btn btn-info">Kaydet</button>
+                                </div>
+                                <input type="hidden" class="form-control" id="Durumu" name="Durumu" value="@Model.Durumu">
+                                <input type="hidden" class="form-control" id="OlusturulmaTarihi" name="OlusturulmaTarihi" value="@Model.OlusturulmaTarihi">
+                                <input type="hidden" class="form-control" id="GuncellenmeTarihi" name="GuncellenmeTarihi" value="@Model.GuncellenmeTarihi">
+                                <input type="hidden" class="form-control" id="CalismaSuresi" name="CalismaSuresi" value="@Model.CalismaSuresi">
+                                <input type="hidden" class="form-control" id="Ucret" name="Ucret" value="@Model.Ucret">
+                            </div>
+                        </form>
+                        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                        {
+                            <div style="margin-top:10px;" class="alert alert-block alert-danger fade in">
+                                <button data-dismiss="alert" class="close close-sm" type="button">
+                                    <i class="icon-remove"></i>
+                                </button>
+                                <strong>Hata!</strong> @ViewBag.ErrorMessage
+                            </div>
+                        }
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>

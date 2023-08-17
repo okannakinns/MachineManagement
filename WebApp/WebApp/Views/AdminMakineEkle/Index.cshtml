@@ -1,0 +1,127 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.Makine>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Makine (@Model.Count() Adet Kayıt Bulunmaktadır)
+                    </header>
+                    <div class="panel-body">
+                        <form method="post" action="@Url.Action("Ekle", "AdminMakineEkle")" role="form">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="Adi">Adi</label>
+                                    <input required type="text" class="form-control" id="Adi" name="Adi">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="MakineTip">Makine Tipi</label>
+                                    <select name="MakineTipId" class="form-control" id="MakineTipId">
+                                        @foreach (var Makine in ViewBag.MakineTipleri)
+                                        {
+                                            <option value="@Makine.Id">@Makine.Adi</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="MarkaId">Markası</label>
+                                    <select name="MarkaId" class="form-control" id="MarkaId">
+                                        <option value="0">Seçiniz</option>
+                                        @foreach (var Marka in ViewBag.Markalar)
+                                        {
+                                            <option value="@Marka.Id">@Marka.Adi</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div id="ModelInput" class="form-group col-md-4">
+                                    <label for="ModelId">Modeli</label>
+                                    <select name="ModelId" class="form-control" id="ModelId">
+                                        @foreach (var Model in ViewBag.Modeller)
+                                        {
+                                            <option value="@Model.Id">@Model.Adi</option>
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="Plaka">Plaka</label>
+                                    <input type="text" class="form-control" id="Plaka" name="Plaka">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Km">Km</label>
+                                    <input type="text" class="form-control" id="Km" name="Km">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="MakineDurum">Makine Durumu</label>
+                                    <select name="MakineDurumId" class="form-control" id="MakineDurumId">
+                                        @foreach (var durum in ViewBag.MakineDurumlari)
+                                        {
+                                            <option value="@durum.Id">@durum.Adi</option>
+                                        }
+                                    </select>
+                                </div>
+
+
+                            </div>
+
+
+                            <button type="submit" class="btn btn-success">Kaydet</button>
+                        </form>
+                        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                        {
+                            <div style="margin-top:10px;" class="alert alert-block alert-danger fade in">
+                                <button data-dismiss="alert" class="close close-sm" type="button">
+                                    <i class="icon-remove"></i>
+                                </button>
+                                <strong>Hata!</strong> @ViewBag.ErrorMessage
+                            </div>
+                        }
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>
+<script src="/WebAdminTheme/js/jquery-1.8.3.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var ModelInputDiv = $("#ModelInput");
+        var Model = $("#ModelId");
+        var Marka = $("#MarkaId");
+
+        ModelInputDiv.hide();
+
+        Marka.on("change", function () {
+            var selectedMarkaId = $(this).val();
+            var seçinizOption = $(this).find('option[value="0"]');
+
+            if (selectedMarkaId !== "") {
+                ModelInputDiv.show();
+                seçinizOption.remove();
+
+                // Models action methodundan verileri al
+                $.get("/AdminMakine/Models", { markaId: selectedMarkaId }, function (data) {
+                    Model.empty();
+                    $.each(data, function (index, model) {
+                        var option = $("<option></option>").val(model.id).text(model.adi);
+                        Model.append(option);
+                    });
+                });
+            } else {
+                ModelInputDiv.hide();
+            }
+        });
+    });
+</script>

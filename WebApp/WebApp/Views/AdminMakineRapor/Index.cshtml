@@ -1,0 +1,110 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.Makine>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <section class="panel-body">
+                        <div class="col-xs-8 col-sm-5 col-md-4 col-lg-4">
+                            <label for="MakineDurumId">Makine Durum</label>
+                            <select name="MakineDurumId" class="form-control" id="MakineDurumId">
+                                <option value="">Tümü</option>
+                                @foreach (var MakineDurum in ViewBag.MakineDurumlari)
+                                {
+                                    <option value="@MakineDurum.Id">@MakineDurum.Adi</option>
+                                }
+                            </select>
+                        </div>
+
+                    </section>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Makine Durum Rapor 
+
+                    </header>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Adı</th>
+                                <th>Makine Durum</th>
+
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Makine in Model)
+                            {
+                                <tr data-durum-id="@Makine.MakineDurumId">
+                                    <td>@Makine.Adi</td>
+                                    <td>@Makine.MakineDurum.Adi</td>
+
+
+
+
+
+
+
+
+
+                                    <td>
+                                        <form method="post" action="@Url.Action("Guncelle", "AdminMakine")" style="display: inline;">
+                                            <input type="hidden" name="id" value="@Makine.Id" />
+                                            <button type="submit" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                        </form>
+                                        <form method="post" action="@Url.Action("Sil", "AdminMakine")" style="display: inline;">
+                                            <input type="hidden" name="id" value="@Makine.Id" />
+                                            <button type="submit" class="btn btn-danger btn-xs" onclick="confirmSilme(event)"><i class="icon-trash"></i></button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>
+<script src="/WebAdminTheme/js/jquery-1.8.3.min.js"></script>
+
+<script>
+    $(document).ready (function (){
+        $("#MakineDurumId").change(function(){
+            var selectedMakineDurumId= $(this).val(); // Seçilen DurumId yi al
+            if(selectedMakineDurumId){
+                $("table.table tbody tr").each(function(){
+                    var rowMakineDurumId=$(this).data("durum-id"); // Tablodaki Durum Id yi Al
+                    
+                    if(selectedMakineDurumId==rowMakineDurumId){
+                        $(this).show();
+                        
+                    }
+                    else{
+                        $(this).hide();
+                    }
+                });
+            }
+            else{
+                //Tümü
+                $("table.table tbody tr").show();
+            }
+
+
+        });
+
+    });
+</script>

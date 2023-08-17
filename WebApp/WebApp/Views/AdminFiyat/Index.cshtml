@@ -1,0 +1,62 @@
+﻿
+@using WebApp.Models;
+@model List<WebApp.Models.Fiyat>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+       
+
+        <section class="panel">
+            <header class="panel-heading">
+               Fiyat Tablosu (@Model.Count() Adet Kayıt Bulunmaktadır)
+                <form method="post" action="@Url.Action("Index", "AdminFiyatEkle")">
+                    <div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+                        <button style="position:fixed; top:80px; right:30px;" type="submit" class="btn btn-success">Ekle</button>
+                    </div>
+                </form>
+            </header>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Adi</th>
+                        <th>Tip</th>
+                        <th>Saatlik</th>
+                        <th>Günlük</th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var fiyat in Model)
+                    {
+                        <tr>
+                            <td>@fiyat.Adi</td>
+                            <td>@fiyat.MakineTip.Adi</td>
+                            <td>@fiyat.Saatlik</td>
+                            <td>@fiyat.Gunluk</td>
+
+
+                            <td>
+                                <form method="post" action="@Url.Action("Guncelle", "AdminFiyat")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@fiyat.Id" />
+                                    <button type="submit" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                </form>
+                                <form method="post" action="@Url.Action("Sil", "AdminFiyat")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@fiyat.Id" />
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="confirmSilme(event)"><i class="icon-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </section>
+    </section>
+</section>

@@ -1,0 +1,193 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.Fotograf>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Galeri
+                    </header>
+                    <section class="panel-body">
+                        <form method="post" action="@Url.Action("plusImage","PhotoGallery")">
+
+
+                            <div class="row">
+                                <div class="form-group col-md-3 col-lg-3">
+                                    <label for="IsId">İş</label>
+                                    <select name="IsId" data-fis-id="@ViewBag.FisImageId" class="form-control" id="IsId">
+
+                                        <option value="">Seçiniz...</option>
+                                        @foreach (var Is in ViewBag.Isler)
+                                        {
+                                            <option value="@Is.Id">@Is.Adi</option>
+                                        }
+                                    </select>
+
+                                </div>
+                                <div class="form-group col-md-3 col-lg-3">
+
+                                    <button style="margin-top:23px;" id="JobSearchButton" class="btn btn-info">Ara</button>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div style="margin-bottom:15px;" class="custom-file col-md-3 col-lg-3">
+                                    <span class="btn btn-white btn-file">
+                                        <span class="fileupload-new" id="selectFileBtn"><i class="icon-paper-clip"></i> Resim Seç</span>
+                                        <input type="file" name="file" id="galleryInput" accept="image/*" style="display: none;" />
+                                    </span>
+                                    <span id="selectedFileName"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <button id="uploadButton" class="btn btn-success">Yükle</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+
+                </section>
+            </div>
+        </div>
+        <div class="row product-list">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <section class="panel prod-container" data-job-id="@item.IsId">
+
+                        <div class="pro-img-box">
+                            <img src="@item.Yolu" alt="" />
+                            <a href="#" class="adtocart">
+                                <i class="icon-shopping-cart"></i>
+                            </a>
+                        </div>
+
+                        <div class="panel-body text-center">
+                            <h4>
+                                <a href="#" class="pro-title">
+                                    @item.Job.Adi
+                                </a>
+                            </h4>
+                            @*<p class="price">$300.00</p>*@
+                            <form method="post" action="@Url.Action("DeleteImage", "PhotoGallery")" style="display: inline;">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-danger deleteButton " onclick="confirmSilme(event)">Sil</button>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            }
+        </div>
+
+
+
+        <!-- page end-->
+    </section>
+</section>
+
+
+
+<script src="/WebAdminTheme/js/jquery-1.8.3.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("#galleryInput").on("change", function () {
+            var fileInput = this;
+            var file = fileInput.files[0];
+
+            if (file) {
+                var formData = new FormData();
+                formData.append("file", file);
+
+
+
+                $.ajax({
+                    url: "/PhotoGallery/UploadImage",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+
+                        // Yükleme başarılı olduğunda resmi önizlemeye ekle
+                        var imageUrl = "/WebAdminTheme/img/" + file.name;
+                        addImageToGallery(imageUrl);
+
+                    },
+                    error: function (error) {
+                        console.error("Hata oluştu:", error);
+                    }
+                });
+            }
+        });
+
+
+        $("#selectFileBtn").on("click", function () {
+            // Dosya seçme işlemini tetikleyelim
+            $("#galleryInput").click();
+        });
+
+        // Dosya seçildiğinde dosya adını gösterme işlemi
+        $("#galleryInput").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $("#selectedFileName").text("Seçilen dosya: " + fileName);
+        });
+
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        var fisImageId = $("#IsId").data("fis-id"); // data-fis-id değerini alın
+
+        if (fisImageId !== null && fisImageId !== undefined) {
+            $("#IsId").val(fisImageId); // ComboBox'ın değerini belirle
+        }
+
+        var originalContent = $(".product-list").html(); // Store original content
+
+        $("#IsId").click(function () {
+            $(".product-list").html(originalContent); // Restore original content
+        });
+        $("#JobSearchButton").click(function (event) {
+            event.preventDefault();
+            var selectedJob = $("#IsId").val();
+            var JobCard = $(".prod-container");
+
+            if (selectedJob) {
+                JobCard.each(function () {
+
+                    var RowJob = $(this).data("job-id");
+                    if (selectedJob == RowJob) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                        $(this).parent().remove();
+
+                    }
+                });
+            } else {
+
+                $(".product-list").html(originalContent); // Restore original content
+            }
+
+
+
+        });
+    });
+
+</script>
+
+
+
+
+
+

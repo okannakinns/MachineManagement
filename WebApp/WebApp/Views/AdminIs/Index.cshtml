@@ -1,0 +1,110 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.Is>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+
+
+        <section class="panel">
+            <header class="panel-heading">
+                İş Tablosu (@Model.Count() Adet Kayıt Bulunmaktadır)
+                <form method="post" action="@Url.Action("Index", "AdminIsEkle")">
+                    <div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+                        <button style="position:fixed; top:80px; right:30px;" type="submit" class="btn btn-success">Ekle</button>
+                    </div>
+                    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                    {
+                        <div class="alert alert-block alert-danger fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="icon-remove"></i>
+                            </button>
+                            <strong>Hata!</strong> @ViewBag.ErrorMessage
+                        </div>
+                    }
+                </form>
+            </header>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Adı</th>
+                        <th>Müşteri</th>
+                        <th>Başlangıç Tarihi</th>
+                        <th>Bitiş Tarihi</th>
+                        <th>Kalan Zaman</th>
+                        
+
+                        
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Is in Model)
+                    {
+                        <tr>
+                            <td>@Is.Adi</td>
+                            <td>@Is.Musteri.AdiSoyadi</td>
+                            <td>@Is.BaslangicTarihi</td>
+                            <td>@Is.BitisTarihi</td>
+                            <td id="isKalanZaman"><span data-time-id="@Is.KalanZaman" class="label  is-time label-mini">@Is.KalanZaman</span></td>
+                            
+                           
+                           
+
+
+
+
+
+
+                            <td>
+                                <form method="post" action="@Url.Action("Guncelle", "AdminIs")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@Is.Id" />
+                                    <button type="submit" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                </form>
+                                <form method="post" action="@Url.Action("Sil", "AdminIs")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@Is.Id" />
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="confirmSilme(event)"><i class="icon-trash"></i></button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+    </section>
+</section>
+
+<script src="/WebAdminTheme/js/jquery-1.8.3.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        updateColors();
+    });
+
+    function updateColors() {
+        $(".is-time").each(function () {
+            var zaman = $(this);
+            var zamandeger = zaman.data("time-id");
+
+            if (zamandeger == "Bugün") {
+                zaman.css("background-color", "red");
+            } else if (zamandeger == "Yapıldı") {
+                zaman.css("background-color", "grey");
+            }
+                    else if (zamandeger == "Başlandı") {
+                    zaman.css("background-color", "blue");
+            } else if (zamandeger == "1 Gün" || zamandeger == "2 Gün" || zamandeger == "3 Gün" || zamandeger == "4 Gün") {
+                zaman.css("background-color", "orange");
+            } else if (zamandeger == "5 Gün" || zamandeger == "6 Gün" || zamandeger == "7 Gün" || zamandeger == "8 Gün" || zamandeger == "9 Gün" || zamandeger == "10 Gün") {
+                zaman.css("background-color", "#ffd800");
+            } else {
+                zaman.css("background-color", "green");
+            }
+        });
+    }
+
+</script>

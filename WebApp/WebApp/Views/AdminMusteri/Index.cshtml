@@ -1,0 +1,70 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.Musteri>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        
+        <section class="panel">
+            <header class="panel-heading">
+                Müşteri Tablosu (@Model.Count() Adet Kayıt Bulunmaktadır)
+                <form method="post" action="@Url.Action("Index", "AdminMusteriEkle")">
+                    <div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+                        <button style="position:fixed; top:80px; right:30px;" type="submit" class="btn btn-success">Ekle</button>
+                    </div>
+                </form>
+            </header>
+            @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+            {
+                <div style="margin-top:10px;" class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Hata!</strong> @ViewBag.ErrorMessage
+                </div>
+            }
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Adı Soyadı</th>
+                        <th>Telefon</th>
+                        <th>Açıklama</th>
+                        <th>E-mail</th>
+
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Musteri in Model)
+                    {
+                        <tr>
+                            <td>@Musteri.AdiSoyadi</td>
+                            <td>@Musteri.Telefon</td>
+                            <td>@Musteri.Aciklama</td>
+                            <td>@Musteri.Email</td>
+
+
+                            <td>
+                                <form method="post" action="@Url.Action("Guncelle", "AdminMusteri")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@Musteri.Id" />
+                                    <button type="submit" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                </form>
+                                <form method="post" action="@Url.Action("Sil", "AdminMusteri")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@Musteri.Id" />
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="confirmSilme(event)"><i class="icon-trash"></i></button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+          
+        </section>
+    </section>
+</section>

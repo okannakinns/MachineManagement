@@ -1,0 +1,144 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.FisIslemleri>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <section class="panel-body">
+                        <form method="post" action="@Url.Action("Filter","AdminMakineTarihRapor")">
+                        <div class="form-group col-xs-8 col-sm-5 col-md-4 col-lg-4">
+                            <label for="BaslangicTarihi">Başlangıç Tarihi</label>
+                            <input type="datetime-local" class="form-control" id="BaslangicTarihi" name="BaslangicTarihi">
+                        </div>
+
+                        <div class="form-group col-xs-8 col-sm-5 col-md-4 col-lg-4">
+                            <label for="BitisTarihi">Bitiş Tarihi</label>
+                            <input type="datetime-local" class="form-control" id="BitisTarihi" name="BitisTarihi">
+                        </div>
+                        <div class="form-group col-xs-8 col-sm-5 col-md-4 col-lg-4">
+                            <button id="calculateButton" class="btn btn-success" style="margin-top:8px;">Hesapla</button>
+                        </div>
+                        </form>
+                       @* <div class="form-group col-xs-8 col-sm-5 col-md-4 col-lg-4">
+                            <button id="deleteButton" class="btn btn-danger" style="margin-top:22px;" >Temizle</button>
+                        </div>*@
+                        
+
+                    </section>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Makine Tarih Rapor
+
+                    </header>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Makine</th>
+                                <th>Başlangıç Tarihi</th>
+                                <th>Bitiş Tarihi</th>
+
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Sayac in Model)
+                            {
+                                <tr data-startdate-id="@Sayac.BaslangicTarihi" data-finishdate-id="@Sayac.BitisTarihi">
+                                    <td>@Sayac.Makine.Adi</td>
+                                    <td>@Sayac.BaslangicTarihi</td>
+                                    <td>@Sayac.BitisTarihi</td>
+
+
+
+
+
+
+
+
+
+                                    <td>
+                                        <form method="post" action="@Url.Action("Guncelle", "AdminSayac")" style="display: inline;">
+                                            <input type="hidden" name="id" value="@Sayac.Id" />
+                                            <button type="submit" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                        </form>
+                                        <form method="post" action="@Url.Action("Sil", "AdminSayac")" style="display: inline;">
+                                            <input type="hidden" name="id" value="@Sayac.Id" />
+                                            <button type="submit" class="btn btn-danger btn-xs" onclick="confirmSilme(event)"><i class="icon-trash"></i></button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>
+<script src="/WebAdminTheme/js/jquery-1.8.3.min.js"></script>
+
+
+@*
+<script>
+    $(document).ready(function () {
+        var deleteButton = $("#deleteButton");
+        var calculateButton = $("#calculateButton");
+        var StartDate = $("#BaslangicTarihi");
+        //var FinishDate = $("#BitisTarihi");
+
+        deleteButton.hide();
+
+        // Butona tıklanınca hesaplama işlemini yapacak olan fonksiyon
+        calculateButton.click(function () {
+            deleteButton.show();
+            calculateButton.hide();
+            filterTable();
+        });
+
+        //FinishDate.change(function () {
+        //    deleteButton.fadeIn();
+        //    filterTable();
+        //});
+
+        deleteButton.click(function () {
+            StartDate.val("");
+            //FinishDate.val("");
+            deleteButton.hide();
+            calculateButton.show();
+            filterTable();
+        });
+
+        function filterTable() {
+            var selectedStartDate = StartDate.val() ? new Date(StartDate.val()) : null;
+            //var selectedFinishDate = FinishDate.val() ? new Date(FinishDate.val()) : null;
+
+            $("table.table tbody tr").each(function () {
+                var rowStartDate = new Date($(this).data("startdate-id"));
+                //var rowFinishDate = new Date($(this).data("finishdate-id"));
+
+                // Tarihleri tam olarak eşleştirmek yerine, sadece gün/ay/yıl karşılaştırması yapalım
+                if (selectedStartDate && selectedStartDate.toDateString() === rowStartDate.toDateString()) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    });
+</script>*@
+
+

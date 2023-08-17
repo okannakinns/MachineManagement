@@ -1,0 +1,74 @@
+﻿@using WebApp.Models;
+@model List<WebApp.Models.FisIslemleri>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+
+        <section class="panel">
+            <header class="panel-heading">
+                Fiş İşlemleri Tablosu (@Model.Count() Adet Kayıt Bulunmaktadır)
+                <form method="post" action="@Url.Action("Index", "AdminFisIslemleriEkle")">
+                    <div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
+                        <button style="position:fixed; top:80px; right:30px;" type="submit" class="btn btn-success">Ekle</button>
+                    </div>
+                </form>
+            </header>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>İş</th>
+                        <th>Makine</th>
+                        <th>Km</th>
+                        <th>Başlangıç Tarihi</th>
+                        <th>Bitiş Tarihi</th>
+                        <th>Fiyat Adı</th>
+                        <th>Çalışma Süresi</th>
+                        <th>Ücret</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var FisIslemleri in Model)
+                    {
+                        <tr>
+                            <td>@FisIslemleri.Is.Adi</td>
+                            <td>@FisIslemleri.Makine.Adi</td>
+                            <td>@FisIslemleri.SonKm Km</td>
+                            <td>@FisIslemleri.BaslangicTarihi</td>
+                            <td>@FisIslemleri.BitisTarihi</td>
+                            <td>@FisIslemleri.Fiyat.Adi</td>
+                            <td>@FisIslemleri.CalismaSuresi </td>
+                            <td>@FisIslemleri.Ucret TL</td>
+
+
+
+
+
+
+                            <td>
+                                <form method="post" action="@Url.Action("FisImage", "PhotoGallery")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@FisIslemleri.Id" />
+                                    <button type="submit" class="btn btn-primary btn-xs"><i class="icon-plus"></i></button>
+                                </form>
+                                <form method="post" action="@Url.Action("Guncelle", "AdminFisIslemleri")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@FisIslemleri.Id" />
+                                    <button type="submit" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                </form>
+                                <form method="post" action="@Url.Action("Sil", "AdminFisIslemleri")" style="display: inline;">
+                                    <input type="hidden" name="id" value="@FisIslemleri.Id" />
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="confirmSilme(event)"><i class="icon-trash"></i></button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+    </section>
+</section>
