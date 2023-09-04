@@ -34,56 +34,7 @@ namespace WebApp.Controllers
            
             
 
-            foreach (var Is in IsListesi)
-            {
-                DateTime? tarihVeri = Is.BaslangicTarihi;
-                TimeSpan KalanZamanVeri = (TimeSpan)(tarihVeri.Value.Date - DateTime.Now.Date);
-                var ayBazliIsVerileri = IsListesi
-     .GroupBy(job => job.BaslangicTarihi.Value.Month)
-     .Select(group => new AyBazliIsVerisi { Ay = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(group.Key), IsSayisi = group.Count() })
-     .OrderBy(veri => DateTime.ParseExact(veri.Ay, "MMMM", CultureInfo.CurrentCulture)) // Ayları sırala
-     .ToList();
-
-
-                // Ay bazlı iş verilerini Model'e aktar
-                ViewBag.AyBazliIsVerileri = ayBazliIsVerileri;
-
-                //ay adları 
-                CultureInfo trCulture = new CultureInfo("tr-TR");
-                List<string> turkceAyAdlari = new List<string>();
-
-                for (int i = 1; i <= 12; i++)
-                {
-                    string ayAdi = trCulture.DateTimeFormat.GetMonthName(i);
-                    turkceAyAdlari.Add(ayAdi);
-                }
-                //ay adlarını modele aktar
-                ViewBag.TurkceAyAdlari = turkceAyAdlari;
-
-                if (KalanZamanVeri.Days < 0)
-                {
-                    if (Is.BitisTarihi == null)
-                    {
-
-                        Is.KalanZaman = "Başlandı";
-                    }
-                    else
-                    {
-                        Is.KalanZaman = "Yapıldı";
-                    }
-
-                }
-                else if (KalanZamanVeri.TotalHours == 0)
-                {
-                    Is.KalanZaman = "Bugün";
-                }
-                else if (KalanZamanVeri.TotalDays >= 1)
-                {
-
-                    Is.KalanZaman = KalanZamanVeri.Days.ToString() + " Gün";
-                }
-            }
-            ViewBag.ClosestJob = null;
+           
             ViewBag.Is = IsListesi;
             context.SaveChanges();
             return View(IsListesi);

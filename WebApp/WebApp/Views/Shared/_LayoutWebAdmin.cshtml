@@ -37,7 +37,7 @@
                 <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
             </div>
             <!--logo start-->
-            <a href="@Url.Action("Index","AdminKullanici")" class="logo">MAKİNE<span>YÖNETİM</span></a>
+            <a href="@Url.Action("Index","AdminAnasayfa")" class="logo">MAKİNE<span>YÖNETİM</span></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <ul class="nav top-menu">
@@ -76,7 +76,8 @@
                                     }
                                 }
                             </li>
-                    @if(ViewBag.JobsCount!=0){
+                            @if (ViewBag.JobCount != 0 && ViewBag.JobCount!=null)
+                            {
                    @foreach (var job in ViewBag.Jobs)
                             {                 
                     <li>
@@ -152,6 +153,12 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
+                    <li>
+                        <a href="@Url.Action("Index","AdminAnasayfa")">
+                            <i class="fi fi-ss-home"></i>
+                            <span>Anasayfa</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="@Url.Action("Index","AdminKullanici")">
                             <i class="fi fi-ss-users"></i>
@@ -273,6 +280,7 @@
     <script src="/WebAdminTheme/js/count.js"></script>
     <script src="/WebAdminTheme/js/ga.js"></script>
     <script type="text/javascript" src="/WebAdminTheme/assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
 
     <script>
 

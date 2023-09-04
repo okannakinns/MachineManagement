@@ -32,147 +32,7 @@
                                         <button id="calculateButton" class="btn" style="margin-top:23px; background-color:#39b5aa; color:#fff;">Müşteri Detay</button>
                                     </div>
                                 </div>
-                                <div class="col-lg-11">
-                                    @if (turkceAyAdlari != null)
-                                    {
-
-                                    }
-                                    <div class="is-grafik">
-                                        <!-- custom chart start -->
-                                        <div class="border-head" style="margin-top: 20px;">
-                                            <h3>İş Grafiği</h3>
-                                        </div>
-                                        <div class="custom-bar-chart">
-                                            <ul class="y-axis">
-
-                                                <li><span>11</span></li>
-                                                <li><span>9</span></li>
-                                                <li><span>7</span></li>
-                                                <li><span>5</span></li>
-                                                <li><span>3</span></li>
-
-                                            </ul>
-
-
-                                            @foreach (var ayadlari in turkceAyAdlari)
-                                            {
-
-
-                                                var ayAdi = ayBazliIsVerileri[i].Ay;
-
-
-                                                var ayVeri = ayBazliIsVerileri.FirstOrDefault(item => item.Ay == ayAdi);
-
-                                                if (ayVeri != null && ayadlari == ayVeri.Ay)
-                                                {
-
-                                                    if (ayVeri.IsSayisi == 1)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">5%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                    if (ayVeri.IsSayisi == 2)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">10%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                    if (ayVeri.IsSayisi == 3)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">20%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                    if (ayVeri.IsSayisi == 4)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">30%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                    if (ayVeri.IsSayisi == 5)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">40%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                    if (ayVeri.IsSayisi == 6)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">50%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                    if (ayVeri.IsSayisi == 7)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">60%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                    if (ayVeri.IsSayisi == 8)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">70%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                    if (ayVeri.IsSayisi == 9)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">80%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                    if (ayVeri.IsSayisi == 10)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">90%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                    if (ayVeri.IsSayisi >= 11)
-                                                    {
-                                                        <div class="bar">
-                                                            <div class="title">@ayadlari</div>
-                                                            <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">100%</div>
-                                                        </div>
-                                                        if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
-                                                    }
-                                                }
-
-                                                else
-                                                {
-                                                    <div class="bar">
-                                                        <div class="title">@ayadlari</div>
-                                                        <div class="value tooltips aybazliIs" data-original-title="0" data-toggle="tooltip" data-placement="top">0</div>
-                                                    </div>
-                                                }
-
-
-                                            }
-
-
-                                        </div>
-                                        <!-- custom chart end -->
-                                    </div>
-
-                                </div>
+                               
 
                             </form>
                         </div>
@@ -333,7 +193,7 @@
                     var rowMusteriId = $(this).data("musteri-id"); // Satırdaki Müşteri Id değerini al
                     if (rowMusteriId == selectedMusteriId) {
                         $("#calculateButton").fadeIn();
-                        $(".is-grafik").hide();
+                        
                         // Eşleşen satırı göster
                         $(this).show();
                     } else {
@@ -345,7 +205,7 @@
                 // Eğer "Seçiniz" seçeneği seçildiyse tüm satırları göster
                 $(".tablo-veriler table.table tbody tr").show();
                 $("#calculateButton").hide();
-                $(".is-grafik").fadeIn();
+                
             }
         }
 
@@ -354,16 +214,14 @@
             var selectedMusteriId = $(this).val(); // Seçilen MusteriId'yi al
             filterTableRows(selectedMusteriId);
             $(".user-info").fadeOut();
-            if (selectedMusteriId != "") {
-                $(".is-grafik").fadeOut();
-            }
+           
 
             $(".contact-info").fadeOut();
         });
         $("#calculate").on('click', function () {
             $(".user-info").fadeIn();
             $(".contact-info").fadeIn();
-            $(".is-grafik").hide();
+            
 
         });
 
@@ -405,40 +263,5 @@
 </script>
 
 
-<script>
-    $(document).ready(function () {
-        var miktar = $(".aybazliIs").data("original-title");
 
-        $(".bar").each(function () {
-            if (miktar == 3) {
-                $(".aybazliIs").css("height", "20%");
-            }
-            if (miktar == 4) {
-                $(".aybazliIs").css("height", "30%");
-            }
-            if (miktar == 5) {
-                $(".aybazliIs").css("height", "40%");
-            }
-            if (miktar == 6) {
-                $(".aybazliIs").css("height", "50%");
-            }
-            if (miktar == 7) {
-                $(".aybazliIs").css("height", "60%");
-            }
-            if (miktar == 8) {
-                $(".aybazliIs").css("height", "70%");
-            }
-            if (miktar == 9) {
-                $(".aybazliIs").css("height", "80%");
-            }
-            if (miktar == 10) {
-                $(".aybazliIs").css("height", "90%");
-            }
-            if (miktar >= 11) {
-                $(".aybazliIs").css("height", "100%");
-            }
-
-        });
-    });
-</script>
 

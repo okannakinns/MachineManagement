@@ -786,7 +786,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .state-overview .value h1, .state-overview .value p  {
     margin: 0;
     padding: 0;
-    color: #c6cad6;
+    
 }
 
 .state-overview .value h1 {
@@ -869,21 +869,21 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     font-size: 12px;
 }
 
-.custom-bar-chart .bar .value {
-    position: absolute;
-    bottom: 0;
-    background: #bfc2cd;
-    color: #bfc2cd;
-    width: 100%;
-    -webkit-border-radius: 5px 5px 0 0;
-    -moz-border-radius: 5px 5px 0 0;
-    border-radius: 5px 5px 0 0;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -ms-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
+    .custom-bar-chart .bar .value {
+        position: absolute;
+        bottom: 0;
+        background: #2A3542;
+        color: #bfc2cd;
+        width: 100%;
+        -webkit-border-radius: 5px 5px 0 0;
+        -moz-border-radius: 5px 5px 0 0;
+        border-radius: 5px 5px 0 0;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease;
+    }
 
 
 
@@ -4664,6 +4664,10 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
     background: #323232;
     color: #fff;
     padding: 10px 0;
+    position:fixed;
+    width:100%;
+    bottom:0px;
+    
    
 }
 

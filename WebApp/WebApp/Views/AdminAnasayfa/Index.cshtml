@@ -1,0 +1,516 @@
+﻿@using WebApp.Models;
+@using System.Globalization;
+
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+    var ayBazliIsVerileri = ViewBag.AyBazliIsVerileri as List<AyBazliIsVerisi>;
+    var turkceAyAdlari = ViewBag.TurkceAyAdlari as List<string>;
+    int i = 0;
+    CultureInfo trCulture = new CultureInfo("tr-TR");
+    DateTime zaman = DateTime.Now;
+
+
+}
+
+<section id="main-content">
+    <section class="wrapper">
+        <!--state overview start-->
+        <div class="row state-overview" >
+            <div class="col-lg-3 col-sm-6" id="adminKullaniciLink" style="cursor:pointer;">
+                <section class="panel">
+                    <div class="symbol terques">
+                        <i class="icon-user"></i>
+                    </div>
+                    <div class="value">
+                        <h1 class="count" data-total-user="@ViewBag.toplamKullanici" >
+                            0
+                        </h1>
+                        <p>Toplam Kullanıcı</p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-3 col-sm-6" id="adminMusteriLink" style="cursor:pointer;">
+                <section class="panel">
+                    <div class="symbol red">
+                        <i class="icon-tags"></i>
+                    </div>
+                    <div class="value">
+                        <h1 class="count2" data-total-musteri="@ViewBag.toplamMusteri">
+                            0
+                        </h1>
+                        <p>Toplam Müşteri</p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-3 col-sm-6" id="adminIsLink" style="cursor:pointer;">
+                <section class="panel">
+                    <div class="symbol yellow">
+                        <i class="icon-shopping-cart"></i>
+                    </div>
+                    <div class="value">
+                        <h1 class=" count3" data-total-job="@ViewBag.toplamIs">
+                            0
+                        </h1>
+                        <p>Toplam Yapılan İş</p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-3 col-sm-6" id="adminFisIslemleriLink" style="cursor:pointer;">
+                <section class="panel">
+                    <div class="symbol blue">
+                        <i class="icon-bar-chart"></i>
+                    </div>
+                    <div class="value">
+                        <h1 class="count4" data-total-ucret="@ViewBag.toplamUcret">
+                            0
+                        </h1>
+                        <p>Yıllık Gelir (@DateTime.Now.Year)</p>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+        <!--state overview end-->
+        <div class="row">
+            <div class="col-lg-6">
+                <section class="panel">
+                   
+                    <section class="panel-body">
+                       
+                       
+                            @if (turkceAyAdlari != null)
+                            {
+
+                            }
+                            <div style="padding-bottom:20px;" class="is-grafik">
+                                <!-- custom chart start -->
+                                <div class="border-head" style="margin-top: 20px;">
+                                    <h3>Ay Bazlı İş Sayısı</h3>
+                                </div>
+                                <div class="custom-bar-chart">
+                                    <ul class="y-axis">
+
+                                        <li><span>11</span></li>
+                                        <li><span>9</span></li>
+                                        <li><span>7</span></li>
+                                        <li><span>5</span></li>
+                                        <li><span>3</span></li>
+
+                                    </ul>
+
+
+                                    @foreach (var ayadlari in turkceAyAdlari)
+                                    {
+
+
+                                        var ayAdi = ayBazliIsVerileri[i].Ay;
+                                        var ayAdiKisaltma=ayAdi.Substring(0, 3).ToUpper();
+
+                                    var ayVeri = ayBazliIsVerileri.FirstOrDefault(item => item.Ay == ayAdiKisaltma);
+
+                                        if (ayVeri != null && ayadlari == ayVeri.Ay)
+                                        {
+
+                                            if (ayVeri.IsSayisi == 1)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">5%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                            if (ayVeri.IsSayisi == 2)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">10%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                            if (ayVeri.IsSayisi == 3)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">20%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                            if (ayVeri.IsSayisi == 4)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">30%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                            if (ayVeri.IsSayisi == 5)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">40%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                            if (ayVeri.IsSayisi == 6)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">50%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                            if (ayVeri.IsSayisi == 7)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">60%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                            if (ayVeri.IsSayisi == 8)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">70%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                            if (ayVeri.IsSayisi == 9)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">80%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                            if (ayVeri.IsSayisi == 10)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">90%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                            if (ayVeri.IsSayisi >= 11)
+                                            {
+                                                <div class="bar">
+                                                    <div class="title">@ayadlari</div>
+                                                    <div class="value tooltips aybazliIs" data-original-title="@ayVeri.IsSayisi" data-toggle="tooltip" data-placement="top">100%</div>
+                                                </div>
+                                                if (i < ayBazliIsVerileri.Count - 1) { i += 1; }
+                                            }
+                                        }
+
+                                        else
+                                        {
+                                            <div class="bar">
+                                                <div class="title">@ayadlari</div>
+                                                <div class="value tooltips aybazliIs" data-original-title="0" data-toggle="tooltip" data-placement="top">0</div>
+                                            </div>
+                                        }
+
+
+                                    }
+
+
+                                </div>
+                                <!-- custom chart end -->
+                            </div>
+
+                        
+                </section>
+                </section>
+            </div>
+           
+                        <div class="col-lg-6">
+                            <!--total earning start-->
+                            <div class="panel green-chart">
+                                <div class="panel-body">
+                                    <div class="chart">
+                                        <div class="heading">
+                                            <span>@zaman.ToString("MMMM", trCulture)</span>
+                                            <strong>@zaman.Day Gün </strong>
+                                        </div>
+                                        <div id="barchart"></div>
+                                    </div>
+                                </div>
+                                <div class="chart-tittle">
+                                    <span class="title">Toplam Kazanç</span>
+                                    @if (ViewBag.toplamAylikKazanc != null)
+                                    {
+                                        <span class="value">@ViewBag.toplamAylikKazanc TL</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="value">0 TL</span>
+                                    }
+
+                                    
+                                </div>
+                            </div>
+                            <!--total earning end-->
+                        </div>
+                        
+                        <div class="col-lg-6">
+                                <!--revenue start-->
+                                <section class="panel">
+                                    <div class="revenue-head">
+                                        <span>
+                                            <i class="icon-bar-chart"></i>
+                                        </span>
+                                        <h3>Aylık Yüzdelik Veri</h3>
+                                        <span class="rev-combo pull-right">
+                                         @zaman.ToString("MMMM", trCulture) Ayı Değerlendirme
+                                        </span>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-sm-6 text-center">
+                                                <div class="easy-pie-chart">
+                                                    <div style="color:green; font-weight:700; font-size:20px;" class="percentage" data-percent="4"><span> Veri Yok</span></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6">
+                                                <div class="chart-info chart-position">
+                                                    <span class="increase"></span>
+                                                    <span id="currentVeri">Bu Ay Verisi Yok</span>
+                                                </div>
+                                                <div class="chart-info">
+                                                    <span class="decrease"></span>
+                                                    <span id="lastVeri">Geçen Ay Verisi Yok</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer revenue-foot">
+                                        <ul>
+                                            <li class="first active" id="GelirButon">
+                                                <a href="javascript:;">
+                                                    <i class="icon-bullseye"></i>
+                                                    Gelir
+                                                </a>
+                                            </li>
+                                            <li id ="IsButon">
+                                                <a href="javascript:;" >
+                                                    <i class=" icon-th-large"></i>
+                                                    İş
+                                                </a>
+                                            </li>
+                                            <li class="last" id="MusteriButon">
+                                                <a href="javascript:;">
+                                                    <i class=" icon-align-justify"></i>
+                                                    Müşteri
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                                <!--revenue end-->
+                        </div>
+                        </div>
+                   
+
+               
+                </section>
+             
+          
+       
+       
+         
+
+        <!-- page end-->
+    </section>
+
+
+<script src="/WebAdminTheme/js/jquery-1.8.3.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#adminKullaniciLink").click(function () {
+            window.location.href = '@Url.Action("Index", "AdminKullanici")';
+        });
+   
+    
+        $("#adminMusteriLink").click(function () {
+            window.location.href = '@Url.Action("Index", "AdminMusteri")';
+        });
+   
+   
+        $("#adminIsLink").click(function () {
+            window.location.href = '@Url.Action("Index", "AdminIs")';
+        });
+   
+    
+        $("#adminFisIslemleriLink").click(function () {
+            window.location.href = '@Url.Action("Index", "AdminFisIslemleri")';
+        });
+    });
+   
+</script>
+
+            <script>
+    $(document).ready(function () {
+        // Sunucudan verileri çek
+        $.ajax({
+            url: '/AdminAnasayfa/GetMonthlyData', // GetMonthlyData action'ınızın URL'si olmalı
+            type: 'GET',
+            success: function (data) {
+                var turkishMonths = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+                var currentMonth = new Date().getMonth() + 1; // JavaScript'te aylar 0'dan başlar, bu yüzden +1 ekliyoruz
+                var daysInMonth = new Date(new Date().getFullYear(), currentMonth, 0).getDate(); // Geçerli ayın gün sayısını al
+
+                var modifiedData = Array.from({ length: daysInMonth+1 }, () => 0); // Tüm verileri 0 ile doldur
+                modifiedData[0]=null;
+                data.forEach(item => {
+                    var bitisGun = item.bitisGun;
+                    var Ucret = item.ucret;
+                    //var bitisTarihi = item.bitisTarihi;
+                    if (modifiedData[bitisGun]!=0){
+                        modifiedData[bitisGun] += Ucret;
+                    }
+                    else{
+                        modifiedData[bitisGun] = Ucret;
+                    }
+                });
+                var deneme=1;
+                
+
+                $("#barchart").sparkline(modifiedData, {
+                    type: 'bar',
+                    height: '65',
+                    barWidth: 8,
+                    barSpacing: 5,
+                    barColor: '#fff',
+                    tooltipFormat:
+                    '<span style="display:block; padding:0px 10px 12px 0px;">' +
+                        '<span style="color: {{color}}">&#9679;</span> {{offset:names}} ' + turkishMonths[currentMonth - 1] + '  ( {{value}} TL) </span>'
+
+
+
+                });
+            }
+        });
+    });
+
+
+            </script>
+
+<script>
+    $(document).ready(function () {
+      
+
+        // Veriyi yükleme ve grafiği güncelleme işlemini bir fonksiyon içine al
+        function updateDataAndChart(buttonId) {
+            $.ajax({
+                url: '/AdminAnasayfa/PercentageData', // GetMonthlyData action'ınızın URL'si olmalı
+                type: 'GET',
+                success: function (data) {
+                    var currentVeriler = data[0];
+                    var lastVeriler = data[1];
+                    var current = $("#currentVeri");
+                    var last = $("#lastVeri");
+
+                    var currentGelir = currentVeriler[2];
+                    var lastGelir = lastVeriler[2];
+                    var currentIs = currentVeriler[0];
+                    var lastIs = lastVeriler[0];
+                    var currentMusteri = currentVeriler[1];
+                    var lastMusteri = lastVeriler[1];
+
+                    current.text("Bu Ay Gelir: " + currentGelir + " TL");
+                    last.text("Geçtiğimiz Ay Gelir: " + lastGelir + " TL");
+
+                    var farkYuzdesiGelir = Math.round(((currentGelir - lastGelir) / lastGelir) * 100);
+                    var percent = farkYuzdesiGelir;
+                    if (currentGelir > lastGelir) {
+                        $(".percentage span:first-child").html('<i class="icon-arrow-up"></i> ' + percent + '%');
+                        $(".percentage").css("color", "green");
+                    }
+                    if (currentGelir <= lastGelir) {
+                        $(".percentage span:first-child").html('<i class="icon-arrow-down"></i> ' + percent + '%');
+                        $(".percentage").css("color", "red");
+                    }
+                    //İş Bölümü Başlangıç
+                    if (buttonId === "IsButon") {
+                        $("#MusteriButon").removeClass("active");
+                        $("#IsButon").addClass("active");
+                        $("#GelirButon").removeClass("active");
+                        current.text("Bu Ay İş Sayısı: " + currentIs);
+                        last.text("Geçtiğimiz Ay İş Sayısı: " + lastIs);
+
+                        var farkYuzdesiIs = Math.round(((currentIs - lastIs) / lastIs) * 100);
+                        percent = farkYuzdesiIs;
+                        if (currentIs > lastIs) {
+                            $(".percentage span:first-child").html('<i class="icon-arrow-up"></i> %' + percent);
+                            $(".percentage").css("color", "green");
+                        }
+                        if (currentIs <= lastIs) {
+                            $(".percentage span:first-child").html('<i class="icon-arrow-down"></i> %' + percent);
+                            $(".percentage").css("color", "red");
+                        }
+
+                        //İş Bölümü Bitiş
+
+                        //Müşteri Bölümü Başlangıç
+                    } else if (buttonId === "MusteriButon") {
+                        $("#MusteriButon").addClass("active");
+                        $("#IsButon").removeClass("active");
+                        $("#GelirButon").removeClass("active");
+                        current.text("Bu Ay Müşteri Sayısı: " + currentMusteri);
+                        last.text("Geçtiğimiz Ay Müşteri Sayısı: " + lastMusteri);
+
+                        var farkYuzdesiMusteri = Math.round(((currentMusteri - lastMusteri) / lastMusteri) * 100);
+                        percent = farkYuzdesiMusteri;
+                        if (currentMusteri > lastMusteri) {
+                            $(".percentage span:first-child").html('<i class="icon-arrow-up"></i> %' + percent);
+                            $(".percentage").css("color", "green");
+                        }
+                        if (currentMusteri <= lastMusteri) {
+                            $(".percentage span:first-child").html('<i class="icon-arrow-down"></i> %' + percent);
+                            $(".percentage").css("color", "red");
+                        }
+
+                        //Müşteri Bölümü Bitiş
+
+
+
+                        //Gelir Bölümü Başlangıç
+                    } else if (buttonId === "GelirButon") {
+                        $("#MusteriButon").removeClass("active");
+                        $("#IsButon").removeClass("active");
+                        $("#GelirButon").addClass("active");
+                        
+                        current.text("Bu Ay Gelir: " + currentGelir + " TL");
+                        last.text("Geçtiğimiz Ay Gelir: " + lastGelir + " TL");
+
+                        var farkYuzdesiGelir = Math.round(((currentGelir - lastGelir) / lastGelir) * 100);
+                        var percent = farkYuzdesiGelir;
+                        if (currentGelir > lastGelir) {
+                            $(".percentage span:first-child").html('<i class="icon-arrow-up"></i> %' + percent);
+                            $(".percentage").css("color", "green");
+                        }
+                        if (currentGelir <= lastGelir) {
+                            $(".percentage span:first-child").html('<i class="icon-arrow-down"></i> %' + percent);
+                            $(".percentage").css("color", "red");
+                        }
+                    }
+                    //Gelir Bölümü Bitiş
+
+                    $('.percentage').attr("data-percent", percent);
+                    $('.percentage').data('easyPieChart').update(percent);
+                }
+            });
+        }
+
+        // Sayfa yüklendiğinde loadData işlemini çağırmak için
+        updateDataAndChart(null);
+
+        // Buton tıklamalarını dinlemek ve veriyi güncellemek için
+        $("#IsButon, #MusteriButon, #GelirButon").on('click', function () {
+            var buttonId = $(this).attr("id");
+            updateDataAndChart(buttonId);
+        });
+    });
+</script>

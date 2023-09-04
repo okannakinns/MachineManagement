@@ -1,0 +1,109 @@
+﻿@using WebApp.Models;
+@model List<object>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutWebAdmin.cshtml";
+   
+}
+
+<section id="main-content">
+    <section class="wrapper">
+        <!-- invoice start-->
+        <section>
+            <div class="panel panel-primary">
+                <!--<div class="panel-heading navyblue"> INVOICE</div>-->
+                <div class="panel-body">
+                    <div class="row invoice-list">
+                        <div class="text-center corporate-id">
+                            <img src="img/vector-lab.jpg" alt="">
+                        </div>
+                       
+                        
+                        <div class="col-lg-4 col-sm-4">
+                            <h4>FATURA BİLGİSİ</h4>
+                            <ul class="unstyled">
+                                <li>Fatura Sahibi		: @Model[0]</li>
+                                <li>Fatura Tarihi		: @DateTime.Now</li>
+                                <li>Fatura Durumu		: Ödendi</li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+        <section class="panel">
+           
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>İş</th>
+                        <th>Km</th>
+                        <th>Başlangıç Tarihi</th>
+                        <th>Bitiş Tarihi</th>
+                        <th>Çalışma Süresi</th>
+                        <th>Ücret</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                        @foreach (var FisIslemleri in ViewBag.FisIslemleri)
+                    {
+                        <tr>
+                            <td>@FisIslemleri.Is.Adi</td>
+                            <td>@FisIslemleri.SonKm Km</td>
+                            <td>@FisIslemleri.BaslangicTarihi</td>
+                            <td>@FisIslemleri.BitisTarihi</td>
+                            <td>@FisIslemleri.CalismaSuresi </td>
+                            <td>@FisIslemleri.Ucret TL</td>
+
+
+
+
+
+
+                            
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+                <div class="row">
+                    <div class="col-lg-4 invoice-block pull-right">
+                        <ul class="unstyled amounts" style="margin-top:30px;">
+                            <li id="Ucret"><strong>Alt Toplam Tutar :</strong>@Model[1]</li>
+                            <li id="Indirim"><strong>İndirim :</strong> 10%</li>
+                            <li><strong>KDV :</strong> -----</li>
+                            <li id="genelTutar"><strong>Genel Tutar :</strong> genelTutar</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center invoice-btn">
+                    <a class="btn btn-info btn-lg" onclick="javascript:window.print();"><i class="icon-print"></i> Yazdır </a>
+                </div>
+               
+            </section>
+            <!-- invoice end-->
+        </section>
+    </section>
+</section>
+
+
+<script src="/WebAdminTheme/js/jquery-1.8.3.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        
+        var UcretText = $("#Ucret").text().trim();
+        var indirimText = $("#Indirim").text().trim();
+
+        var Ucret = parseFloat(UcretText.split(':')[1]);
+        var indirim = parseFloat(indirimText.split(':')[1]);
+
+        var genelTutar = Ucret * (1 - indirim / 100);
+        $("#genelTutar").html("<strong>Genel Tutar : </strong>"+genelTutar.toFixed(2)+" TL");
+
+    });
+</script>

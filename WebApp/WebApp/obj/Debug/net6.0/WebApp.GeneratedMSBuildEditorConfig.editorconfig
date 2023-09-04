@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\VS DOSYALARI\Makine\WebApp\WebApp
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/VS DOSYALARI/Makine/WebApp/WebApp/Views/AdminAnasayfa/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5BbmFzYXlmYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/VS DOSYALARI/Makine/WebApp/WebApp/Views/AdminFisIslemleriEkle/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5GaXNJc2xlbWxlcmlFa2xlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/VS DOSYALARI/Makine/WebApp/WebApp/Views/AdminFisIslemleri/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5GaXNJc2xlbWxlcmlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/VS DOSYALARI/Makine/WebApp/WebApp/Views/AdminFisYazdir/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5GaXNZYXpkaXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/VS DOSYALARI/Makine/WebApp/WebApp/Views/AdminFiyatEkle/Index.cshtml]

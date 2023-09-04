@@ -43,7 +43,7 @@ namespace WebApp.Controllers
                 HttpContext.Session.SetString("KullaniciAdi", kullanici.Adi);
 
                 dbContext.SaveChanges();
-                return RedirectToAction("Index", "AdminKullanici");
+                return RedirectToAction("Index", "AdminAnasayfa");
             }
             else
             {

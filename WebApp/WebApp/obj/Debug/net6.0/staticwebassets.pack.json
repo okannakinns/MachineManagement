@@ -6889,14 +6889,6 @@
       "PackagePath": "staticwebassets\\WebAdminTheme\\img\\500_icon.png"
     },
     {
-      "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\ad.png",
-      "PackagePath": "staticwebassets\\WebAdminTheme\\img\\ad.png"
-    },
-    {
-      "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\americano1_1.png",
-      "PackagePath": "staticwebassets\\WebAdminTheme\\img\\americano1_1.png"
-    },
-    {
       "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\arrow-up.png",
       "PackagePath": "staticwebassets\\WebAdminTheme\\img\\arrow-up.png"
     },
@@ -6923,6 +6915,10 @@
     {
       "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\blank_flower.jpg",
       "PackagePath": "staticwebassets\\WebAdminTheme\\img\\blank_flower.jpg"
+    },
+    {
+      "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\buyukisler-1-1.jpg",
+      "PackagePath": "staticwebassets\\WebAdminTheme\\img\\buyukisler-1-1.jpg"
     },
     {
       "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\chart-texture.jpg",
@@ -7061,6 +7057,14 @@
       "PackagePath": "staticwebassets\\WebAdminTheme\\img\\gallery\\7.jpg"
     },
     {
+      "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\isresmi1.jpg",
+      "PackagePath": "staticwebassets\\WebAdminTheme\\img\\isresmi1.jpg"
+    },
+    {
+      "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\isresmi3.jpg",
+      "PackagePath": "staticwebassets\\WebAdminTheme\\img\\isresmi3.jpg"
+    },
+    {
       "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\latte1.png",
       "PackagePath": "staticwebassets\\WebAdminTheme\\img\\latte1.png"
     },
@@ -7073,10 +7077,6 @@
       "PackagePath": "staticwebassets\\WebAdminTheme\\img\\lock-bg.jpg"
     },
     {
-      "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\macchiato.png",
-      "PackagePath": "staticwebassets\\WebAdminTheme\\img\\macchiato.png"
-    },
-    {
       "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\mail-avatar.jpg",
       "PackagePath": "staticwebassets\\WebAdminTheme\\img\\mail-avatar.jpg"
     },
@@ -7087,10 +7087,6 @@
     {
       "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\mask.png",
       "PackagePath": "staticwebassets\\WebAdminTheme\\img\\mask.png"
-    },
-    {
-      "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\mocha1.png",
-      "PackagePath": "staticwebassets\\WebAdminTheme\\img\\mocha1.png"
     },
     {
       "Id": "D:\\VS DOSYALARI\\Makine\\WebApp\\WebApp\\wwwroot\\WebAdminTheme\\img\\nav-expand.png",
